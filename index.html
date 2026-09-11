@@ -715,7 +715,7 @@
             const maxCbPct = scheme[2].maxCashbackPct !== undefined ? scheme[2].maxCashbackPct : 0.15;
             const penaltyFee = scheme[2].penaltyNominal !== undefined ? scheme[2].penaltyNominal : 50000;
 
-            const kuotaCashback = Math.round(totalClosing * maxCbPct);
+            const kuotaCashback = Math.floor(totalClosing * maxCbPct);
             let lebihKuota = cashback > kuotaCashback;
             let jumlahLebihan = lebihKuota ? Math.ceil(cashback - kuotaCashback) : 0;
 
