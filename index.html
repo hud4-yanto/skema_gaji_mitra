@@ -61,6 +61,17 @@
 
         <!-- ================= TAB 0: SKEMA & PAKET ================= -->
         <div id="tabContent-0" class="tab-pane space-y-8">
+            <div class="bg-indigo-50 border border-indigo-100 rounded-2xl p-4">
+                <div class="flex items-start gap-3">
+                    <div class="text-indigo-600 text-lg">ℹ️</div>
+                    <div class="text-sm text-indigo-900">
+                        <b>Master Skema Saat Ini:</b> parameter pada tab ini menjadi sumber perhitungan
+                        <b>Simulasi THP (Skema Asli)</b>. Sementara <b>Simulasi THP (Skema Baru)</b>
+                        menggunakan parameter terpisah dari <b>Setting Skema Baru</b>.
+                    </div>
+                </div>
+            </div>
+
             <div class="bg-white rounded-2xl p-6 shadow-sm border border-slate-200">
                 <h2 class="text-lg font-bold text-slate-900 mb-4 flex items-center gap-2">
                     <svg class="w-5 h-5 text-indigo-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>
@@ -117,7 +128,7 @@
                 <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-6">
                     <div>
                         <h2 class="text-lg font-bold text-slate-900">Data Mitra, Rincian Paket Terjual & Ringkasan Bulanan (3 Bulan Terakhir)</h2>
-                        <p class="text-slate-500 text-sm">Input rincian paket (Cashback / Canvassing) beserta jumlahnya. Ringkasan closing bulanan dan survey dapat diedit secara terpisah.</p>
+                        <p class="text-slate-500 text-sm">Input rincian paket (Cashback / Canvassing) beserta jumlahnya. Ringkasan closing bulanan dihitung otomatis dari rincian tersebut.</p>
                     </div>
                     <div class="flex gap-2">
                         <button onclick="addNewMitra()" class="bg-indigo-600 hover:bg-indigo-700 text-white px-4 py-2 rounded-xl text-sm font-medium transition-all shadow-sm">
@@ -140,7 +151,11 @@
                 <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-6">
                     <div>
                         <h2 class="text-lg font-bold text-slate-900">Simulasi Take Home Pay (THP) - Skema Asli</h2>
-                        <p class="text-slate-500 text-sm">Kalkulasi rinci mencakup kuota cashback (15% rounded), denda kelebihan cashback, potongan threshold (<30), dan insentif.</p>
+                        <p class="text-slate-500 text-sm">Mengikuti 100% parameter skema yang berlaku pada tab <b>Skema & Paket</b>. Perubahan pada Setting Skema Baru tidak memengaruhi simulasi ini.</p>
+                        <div class="mt-2 inline-flex items-center gap-2 px-3 py-1.5 rounded-lg bg-indigo-50 text-indigo-700 text-xs font-semibold border border-indigo-100">
+                            <span class="w-2 h-2 rounded-full bg-indigo-500"></span>
+                            Sumber parameter: Tab 1 — Skema & Paket
+                        </div>
                     </div>
                     <div class="flex items-center gap-3">
                         <label class="text-sm font-medium text-slate-700">Pilih Bulan:</label>
@@ -184,7 +199,7 @@
                 <div class="flex justify-between items-center mb-4">
                     <div>
                         <h2 class="text-lg font-bold text-slate-900">Pengaturan Skema Gaji & Komisi Baru (Usulan)</h2>
-                        <p class="text-slate-500 text-sm">Sesuaikan nominal gapok, persentase kuota cashback, denda pelanggaran, dan threshold untuk simulasi.</p>
+                        <p class="text-slate-500 text-sm">Pengaturan ini berdiri sendiri untuk simulasi skema baru. Perubahan di sini tidak mengubah perhitungan THP Skema Asli.</p>
                     </div>
                     <button onclick="resetCustomScheme()" class="bg-slate-100 hover:bg-slate-200 text-slate-700 px-4 py-2 rounded-xl text-sm font-medium transition-all">
                         Reset ke Default
@@ -193,6 +208,12 @@
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-6" id="customSchemeFormContainer">
                     <!-- Populated via JS -->
                 </div>
+                <div class="mt-4 p-3 rounded-xl bg-white border border-indigo-100 text-xs text-slate-600">
+                    <b class="text-indigo-700">Catatan:</b> Data mitra, closing, survey, dan daftar paket tetap menjadi
+                    data operasional bersama. Yang dibedakan adalah <b>parameter perhitungan THP</b>:
+                    Skema Asli mengambil dari <b>Skema & Paket</b>, sedangkan Skema Baru mengambil dari pengaturan di tab ini.
+                </div>
+
                 <div class="mt-6 flex justify-end">
                     <button onclick="saveCustomScheme()" class="bg-emerald-600 hover:bg-emerald-700 text-white px-6 py-2.5 rounded-xl font-medium text-sm transition-all shadow-sm">
                         Simpan & Terapkan Skema Baru
@@ -207,7 +228,11 @@
                 <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-6">
                     <div>
                         <h2 class="text-lg font-bold text-slate-900">Simulasi Take Home Pay (THP) - Skema Baru</h2>
-                        <p class="text-slate-500 text-sm">Perhitungan THP mitra menggunakan parameter dari skema baru yang telah Anda setting.</p>
+                        <p class="text-slate-500 text-sm">Menggunakan parameter dari <b>Setting Skema Baru</b>. Variabel/KPI tambahan yang Anda input di sana hanya berlaku untuk simulasi ini.</p>
+                        <div class="mt-2 inline-flex items-center gap-2 px-3 py-1.5 rounded-lg bg-emerald-50 text-emerald-700 text-xs font-semibold border border-emerald-100">
+                            <span class="w-2 h-2 rounded-full bg-emerald-500"></span>
+                            Sumber parameter: Tab 4 — Setting Skema Baru
+                        </div>
                     </div>
                     <div class="flex items-center gap-3">
                         <label class="text-sm font-medium text-slate-700">Pilih Bulan:</label>
@@ -233,7 +258,7 @@
                                 <th class="p-3 font-semibold">Potongan Komisi (cashback)</th>
                                 <th class="p-3 font-semibold">Potongan Komisi (Threshold)</th>
                                 <th class="p-3 font-semibold">Komisi Akhir</th>
-                                <th class="p-3 font-semibold">Insentif dan Bonus</th>
+                                <th class="p-3 font-semibold">Insentif & KPI</th>
                                 <th class="p-3 font-semibold font-bold text-emerald-700 rounded-r-xl">Total THP</th>
                             </tr>
                         </thead>
@@ -248,7 +273,7 @@
     </main>
 
     <script>
-        // Default Data Models
+        // MASTER DATA SKEMA SAAT INI — sumber THP Skema Asli
         const defaultSchemeData = [
             { variabel: "Fee Dasar / Gapok", ketentuan: "-", nominal: 1000000, deskripsi: "Gaji pokok cair full" },
             { variabel: "Komisi Dasar", ketentuan: "-", nominalRate: 1.0, deskripsi: "Dihitung dari harga yang dibayarkan" },
@@ -262,6 +287,12 @@
             { variabel: "Growth Reward", ketentuan: "Setiap ada kenaikan kelipatan 5 per bulan & top performance", nominal: 200000, deskripsi: "Reward kenaikan kelipatan 5 per bulan" }
         ];
 
+        const defaultKpiList = [
+            { name: "Target Kedisiplinan", nominal: 100000 },
+            { name: "Laporan Tepat Waktu", nominal: 100000 }
+        ];
+
+        // MASTER DATA PAKET — digunakan sebagai sumber harga paket pada kedua simulasi
         const defaultPackages = [
             { id: "home1", name: "Home 1", price: 100000, speed: "10 Mbps" },
             { id: "home2", name: "Home 2", price: 120000, speed: "30 Mbps" },
@@ -376,6 +407,7 @@
         ];
 
         let customScheme = JSON.parse(JSON.stringify(defaultSchemeData));
+        let customKpis = JSON.parse(JSON.stringify(defaultKpiList));
 
         function formatRupiah(number) {
             return new Intl.NumberFormat('id-ID', { style: 'currency', currency: 'IDR', maximumFractionDigits: 0 }).format(number);
@@ -430,7 +462,7 @@
             `).join('');
         }
 
-        // Helper to get summary of canvass, cashback, and revenue for a month
+        // Helper to get summary of canvass, cashback, and revenue for a month based on package items
         function getMonthSummary(monthObj) {
             let canvassCount = 0;
             let cashbackCount = 0;
@@ -692,58 +724,93 @@
             renderTab1();
         }
 
-        // Calculation Engine
-        function calculateThp(mitra, monthKey, scheme) {
+        // ============================================================
+        // CALCULATION ENGINE
+        // ============================================================
+        // SKEMA ASLI:
+        //   - Parameter = defaultSchemeData (master pada Tab "Skema & Paket")
+        //   - Harga paket = defaultPackages (master pada Tab "Skema & Paket")
+        //   - TIDAK membaca customScheme maupun customKpis.
+        //
+        // SKEMA BARU:
+        //   - Parameter = customScheme + customKpis (Tab "Setting Skema Baru")
+        //   - Data paket/closing tetap berasal dari Data Mitra & Closing.
+        // ============================================================
+        function calculateThp(mitra, monthKey, scheme, kpis = [], options = {}) {
             const mMonth = mitra[monthKey] || { packages: [], survey: 0 };
             const summary = getMonthSummary(mMonth);
-            
+
             const canvass = summary.canvassCount;
             const cashback = summary.cashbackCount;
             const totalClosing = summary.totalClosing;
             const surveyCount = mMonth.survey || 0;
 
-            // Average package price calculation
-            const avgPrice = summary.totalCount > 0 ? (summary.totalRevenue / summary.totalCount) : 100000;
+            // Harga paket tetap mengikuti master defaultPackages.
+            const avgPrice = summary.totalCount > 0
+                ? (summary.totalRevenue / summary.totalCount)
+                : (defaultPackages[0]?.price || 100000);
 
             const gapok = scheme[0].nominal;
             const komisiRate = scheme[1].nominalRate;
-            
-            // Total Komisi (sebelum dipotong) = Komisi Dasar * Harga Rata-rata * Total Closing
+
             const totalKomisiKotor = avgPrice * komisiRate * totalClosing;
 
-            // Cashback quota parameters from scheme (rounded)
             const maxCbPct = scheme[2].maxCashbackPct !== undefined ? scheme[2].maxCashbackPct : 0.15;
             const penaltyFee = scheme[2].penaltyNominal !== undefined ? scheme[2].penaltyNominal : 50000;
 
             const kuotaCashback = Math.floor(totalClosing * maxCbPct);
-            let lebihKuota = cashback > kuotaCashback;
-            let jumlahLebihan = lebihKuota ? Math.ceil(cashback - kuotaCashback) : 0;
+            const lebihKuota = cashback > kuotaCashback;
+            const jumlahLebihan = lebihKuota ? Math.ceil(cashback - kuotaCashback) : 0;
 
-            // Potongan Komisi Cashback (Denda)
             const potKomisiCashback = jumlahLebihan * penaltyFee;
 
-            // Cluster Potongan Threshold (< 30)
-            let potonganThresholdRate = 0.5; // default 50%
-            let isBelowThreshold = totalClosing < 30;
-            if (!isBelowThreshold) {
-                potonganThresholdRate = scheme[3].nominalRate; // 0%
-            }
+            // Threshold default saat ini = 30.
+            // Parameter ini dapat dibuat editable di Setting Skema Baru bila diperlukan.
+            const threshold = options.threshold ?? 30;
+            const belowThresholdRate = options.belowThresholdRate ?? 0.5;
+            const atOrAboveThresholdRate = scheme[3]?.nominalRate ?? 0;
+
+            const potonganThresholdRate = totalClosing < threshold
+                ? belowThresholdRate
+                : atOrAboveThresholdRate;
+
             const potKomisiThreshold = totalKomisiKotor * potonganThresholdRate;
+            const komisiAkhir = Math.max(
+                0,
+                totalKomisiKotor - potKomisiCashback - potKomisiThreshold
+            );
 
-            // Komisi Akhir = Total Komisi Kotor - Pot. Cashback - Pot. Threshold
-            const komisiAkhir = Math.max(0, totalKomisiKotor - potKomisiCashback - potKomisiThreshold);
+            const insentifSurvey = surveyCount * (scheme[5]?.nominal || 0);
 
-            // Insentif & Bonus
-            const insentifSurvey = surveyCount * scheme[5].nominal;
-            
             let bonusPencapaian = 0;
-            if (totalClosing >= 40) bonusPencapaian = scheme[8].nominal;
-            else if (totalClosing >= 35) bonusPencapaian = scheme[7].nominal;
-            else if (totalClosing >= 25) bonusPencapaian = scheme[6].nominal;
+            if (totalClosing >= 40) bonusPencapaian = scheme[8]?.nominal || 0;
+            else if (totalClosing >= 35) bonusPencapaian = scheme[7]?.nominal || 0;
+            else if (totalClosing >= 25) bonusPencapaian = scheme[6]?.nominal || 0;
 
-            let growthReward = totalClosing >= 35 ? scheme[9].nominal : 0;
+            const growthReward = totalClosing >= 35
+                ? (scheme[9]?.nominal || 0)
+                : 0;
 
-            const totalInsentifBonus = insentifSurvey + bonusPencapaian + growthReward;
+            let totalKpiNominal = 0;
+            let kpiDetailHtml =
+                `Survey(${surveyCount}): ${formatRupiah(insentifSurvey)}` +
+                `<br>Bonus: ${formatRupiah(bonusPencapaian)}` +
+                `<br>Growth: ${formatRupiah(growthReward)}`;
+
+            // KPI tambahan HANYA berlaku untuk simulasi skema baru.
+            if (options.useCustomKpis && kpis && kpis.length > 0) {
+                kpis.forEach(k => {
+                    totalKpiNominal += (k.nominal || 0);
+                    kpiDetailHtml += `<br>${k.name}: ${formatRupiah(k.nominal)}`;
+                });
+            }
+
+            const totalInsentifBonus =
+                insentifSurvey +
+                bonusPencapaian +
+                growthReward +
+                totalKpiNominal;
+
             const totalThp = gapok + komisiAkhir + totalInsentifBonus;
 
             return {
@@ -757,19 +824,40 @@
                 potKomisiCashback,
                 potKomisiThreshold,
                 komisiAkhir,
-                detailInsentif: `Survey(${surveyCount}): ${formatRupiah(insentifSurvey)}<br>Bonus: ${formatRupiah(bonusPencapaian)}<br>Growth: ${formatRupiah(growthReward)}`,
+                detailInsentif: kpiDetailHtml,
                 totalThp
             };
         }
 
         function renderThpSim(isNewScheme) {
-            const monthKey = document.getElementById(isNewScheme ? 'simMonthSelectNew' : 'simMonthSelect').value;
+            const monthKey = document.getElementById(
+                isNewScheme ? 'simMonthSelectNew' : 'simMonthSelect'
+            ).value;
+
+            // PEMISAHAN SUMBER:
+            // THP Asli -> hanya defaultSchemeData / defaultPackages.
+            // THP Baru -> customScheme / customKpis.
             const schemeToUse = isNewScheme ? customScheme : defaultSchemeData;
-            const tbodyId = isNewScheme ? 'thpBaruTableBody' : 'thpAsliTableBody';
-            
+            const kpisToUse = isNewScheme ? customKpis : [];
+            const calcOptions = isNewScheme
+                ? { useCustomKpis: true }
+                : { useCustomKpis: false };
+
+            const tbodyId = isNewScheme
+                ? 'thpBaruTableBody'
+                : 'thpAsliTableBody';
+
             const tbody = document.getElementById(tbodyId);
+
             tbody.innerHTML = mitraData.map(m => {
-                const calc = calculateThp(m, monthKey, schemeToUse);
+                const calc = calculateThp(
+                    m,
+                    monthKey,
+                    schemeToUse,
+                    kpisToUse,
+                    calcOptions
+                );
+
                 return `
                     <tr class="hover:bg-slate-50 transition-colors">
                         <td class="p-3 font-medium text-slate-900">${m.name}</td>
@@ -778,15 +866,29 @@
                         <td class="p-3 text-center font-bold text-slate-800">${calc.totalClosing}</td>
                         <td class="p-3 text-center">${calc.kuotaCashback}</td>
                         <td class="p-3 text-center">
-                            <span class="px-2 py-0.5 rounded text-[10px] font-semibold ${calc.isLebih === 'Ya' ? 'bg-rose-100 text-rose-700' : 'bg-emerald-100 text-emerald-700'}">${calc.isLebih}</span>
+                            <span class="px-2 py-0.5 rounded text-[10px] font-semibold ${
+                                calc.isLebih === 'Ya'
+                                    ? 'bg-rose-100 text-rose-700'
+                                    : 'bg-emerald-100 text-emerald-700'
+                            }">${calc.isLebih}</span>
                         </td>
                         <td class="p-3 text-center font-semibold text-rose-600">${calc.jumlahLebihan}</td>
                         <td class="p-3">${formatRupiah(calc.totalKomisiKotor)}</td>
-                        <td class="p-3 text-rose-600 font-medium">${calc.potKomisiCashback > 0 ? formatRupiah(calc.potKomisiCashback) : '-'}</td>
-                        <td class="p-3 text-amber-600 font-medium">${calc.potKomisiThreshold > 0 ? formatRupiah(calc.potKomisiThreshold) : '-'}</td>
+                        <td class="p-3 text-rose-600 font-medium">${
+                            calc.potKomisiCashback > 0
+                                ? formatRupiah(calc.potKomisiCashback)
+                                : '-'
+                        }</td>
+                        <td class="p-3 text-amber-600 font-medium">${
+                            calc.potKomisiThreshold > 0
+                                ? formatRupiah(calc.potKomisiThreshold)
+                                : '-'
+                        }</td>
                         <td class="p-3 font-semibold text-indigo-600">${formatRupiah(calc.komisiAkhir)}</td>
                         <td class="p-3 text-[11px] text-slate-500">${calc.detailInsentif}</td>
-                        <td class="p-3 font-bold ${isNewScheme ? 'text-emerald-700' : 'text-indigo-700'} text-sm">${formatRupiah(calc.totalThp)}</td>
+                        <td class="p-3 font-bold ${
+                            isNewScheme ? 'text-emerald-700' : 'text-indigo-700'
+                        } text-sm">${formatRupiah(calc.totalThp)}</td>
                     </tr>
                 `;
             }).join('');
@@ -794,6 +896,7 @@
 
         function renderCustomSchemeForm() {
             const container = document.getElementById('customSchemeFormContainer');
+
             container.innerHTML = `
                 <div class="space-y-4 bg-slate-50 p-5 rounded-xl border border-slate-200">
                     <h3 class="font-bold text-slate-800 border-b pb-2">Komponen Utama & Cashback</h3>
@@ -819,30 +922,80 @@
                     </div>
                 </div>
 
-                <div class="space-y-4 bg-slate-50 p-5 rounded-xl border border-slate-200">
-                    <h3 class="font-bold text-slate-800 border-b pb-2">Insentif & Bonus</h3>
-                    <div>
-                        <label class="block text-xs font-semibold text-slate-600 mb-1">Insentif Survey Per Customer (Rp)</label>
-                        <input type="number" id="customInsentifSurvey" value="${customScheme[5].nominal}" class="w-full bg-white border border-slate-300 rounded-xl p-2 text-sm focus:ring-2 focus:ring-indigo-500">
+                <div class="space-y-6">
+                    <div class="space-y-4 bg-slate-50 p-5 rounded-xl border border-slate-200">
+                        <h3 class="font-bold text-slate-800 border-b pb-2">Insentif & Bonus Pencapaian</h3>
+                        <div>
+                            <label class="block text-xs font-semibold text-slate-600 mb-1">Insentif Survey Per Customer (Rp)</label>
+                            <input type="number" id="customInsentifSurvey" value="${customScheme[5].nominal}" class="w-full bg-white border border-slate-300 rounded-xl p-2 text-sm focus:ring-2 focus:ring-indigo-500">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-semibold text-slate-600 mb-1">Bonus Tier 1 (Closing 25-34) (Rp)</label>
+                            <input type="number" id="customBonus1" value="${customScheme[6].nominal}" class="w-full bg-white border border-slate-300 rounded-xl p-2 text-sm focus:ring-2 focus:ring-indigo-500">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-semibold text-slate-600 mb-1">Bonus Tier 2 (Closing 35-39) (Rp)</label>
+                            <input type="number" id="customBonus2" value="${customScheme[7].nominal}" class="w-full bg-white border border-slate-300 rounded-xl p-2 text-sm focus:ring-2 focus:ring-indigo-500">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-semibold text-slate-600 mb-1">Bonus Tier 3 (Closing >= 40) (Rp)</label>
+                            <input type="number" id="customBonus3" value="${customScheme[8].nominal}" class="w-full bg-white border border-slate-300 rounded-xl p-2 text-sm focus:ring-2 focus:ring-indigo-500">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-semibold text-slate-600 mb-1">Growth Reward (Rp)</label>
+                            <input type="number" id="customGrowth" value="${customScheme[9].nominal}" class="w-full bg-white border border-slate-300 rounded-xl p-2 text-sm focus:ring-2 focus:ring-indigo-500">
+                        </div>
                     </div>
-                    <div>
-                        <label class="block text-xs font-semibold text-slate-600 mb-1">Bonus Tier 1 (Closing 25-34) (Rp)</label>
-                        <input type="number" id="customBonus1" value="${customScheme[6].nominal}" class="w-full bg-white border border-slate-300 rounded-xl p-2 text-sm focus:ring-2 focus:ring-indigo-500">
-                    </div>
-                    <div>
-                        <label class="block text-xs font-semibold text-slate-600 mb-1">Bonus Tier 2 (Closing 35-39) (Rp)</label>
-                        <input type="number" id="customBonus2" value="${customScheme[7].nominal}" class="w-full bg-white border border-slate-300 rounded-xl p-2 text-sm focus:ring-2 focus:ring-indigo-500">
-                    </div>
-                    <div>
-                        <label class="block text-xs font-semibold text-slate-600 mb-1">Bonus Tier 3 (Closing >= 40) (Rp)</label>
-                        <input type="number" id="customBonus3" value="${customScheme[8].nominal}" class="w-full bg-white border border-slate-300 rounded-xl p-2 text-sm focus:ring-2 focus:ring-indigo-500">
-                    </div>
-                    <div>
-                        <label class="block text-xs font-semibold text-slate-600 mb-1">Growth Reward (Rp)</label>
-                        <input type="number" id="customGrowth" value="${customScheme[9].nominal}" class="w-full bg-white border border-slate-300 rounded-xl p-2 text-sm focus:ring-2 focus:ring-indigo-500">
+
+                    <!-- Dedicated KPI Card with Multi-row dynamic inputs -->
+                    <div class="space-y-4 bg-indigo-50/50 p-5 rounded-xl border border-indigo-200">
+                        <div class="flex justify-between items-center border-b border-indigo-200 pb-2">
+                            <h3 class="font-bold text-indigo-900">Variabel KPI Tambahan</h3>
+                            <button onclick="addCustomKpiRow()" class="bg-indigo-600 hover:bg-indigo-700 text-white px-3 py-1 rounded-lg text-xs font-semibold transition-all">
+                                + Tambah KPI
+                            </button>
+                        </div>
+                        <div id="kpiRowsContainer" class="space-y-3">
+                            ${customKpis.map((kpi, idx) => `
+                                <div class="flex items-center gap-2 bg-white p-3 rounded-xl border border-indigo-100 shadow-sm">
+                                    <input type="text" id="kpiName_${idx}" value="${kpi.name}" placeholder="Nama Variabel KPI" class="flex-1 bg-slate-50 border border-slate-300 rounded-lg px-3 py-1.5 text-xs focus:ring-2 focus:ring-indigo-500">
+                                    <input type="number" id="kpiNominal_${idx}" value="${kpi.nominal}" placeholder="Nominal (Rp)" class="w-32 bg-slate-50 border border-slate-300 rounded-lg px-3 py-1.5 text-xs focus:ring-2 focus:ring-indigo-500">
+                                    <button onclick="removeCustomKpiRow(${idx})" class="text-rose-500 hover:text-rose-700 p-1.5 font-bold">✕</button>
+                                </div>
+                            `).join('')}
+                        </div>
                     </div>
                 </div>
             `;
+        }
+
+        function addCustomKpiRow() {
+            // Collect current inputs first
+            syncKpisFromDOM();
+            customKpis.push({ name: "KPI Baru", nominal: 50000 });
+            renderCustomSchemeForm();
+        }
+
+        function removeCustomKpiRow(idx) {
+            syncKpisFromDOM();
+            customKpis.splice(idx, 1);
+            renderCustomSchemeForm();
+        }
+
+        function syncKpisFromDOM() {
+            const rows = document.querySelectorAll('#kpiRowsContainer > div');
+            const updated = [];
+            rows.forEach((row, idx) => {
+                const nameEl = document.getElementById(`kpiName_${idx}`);
+                const nomEl = document.getElementById(`kpiNominal_${idx}`);
+                if (nameEl && nomEl) {
+                    updated.push({
+                        name: nameEl.value || `KPI ${idx+1}`,
+                        nominal: parseFloat(nomEl.value) || 0
+                    });
+                }
+            });
+            customKpis = updated;
         }
 
         function saveCustomScheme() {
@@ -856,13 +1009,16 @@
             customScheme[7].nominal = parseFloat(document.getElementById('customBonus2').value) || 0;
             customScheme[8].nominal = parseFloat(document.getElementById('customBonus3').value) || 0;
             customScheme[9].nominal = parseFloat(document.getElementById('customGrowth').value) || 0;
+            
+            syncKpisFromDOM();
 
-            alert("Skema gaji baru berhasil disimpan! Silakan cek Tab 5 untuk melihat simulasi THP dengan skema baru.");
             switchTab(4);
         }
 
         function resetCustomScheme() {
+            // Reset hanya draft Skema Baru; tidak mengubah sumber THP Skema Asli.
             customScheme = JSON.parse(JSON.stringify(defaultSchemeData));
+            customKpis = JSON.parse(JSON.stringify(defaultKpiList));
             renderCustomSchemeForm();
         }
 
